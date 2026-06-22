@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Session | Bruv Councilor Agency</title>
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:linear-gradient(135deg,#1a73e8 0%,#0d47a1 100%);margin:0;padding:15px;min-height:100vh}
+.card{max-width:480px;margin:auto;background:white;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.header{background:linear-gradient(135deg,#1a73e8 0%,#0d47a1 100%);color:white;text-align:center;padding:35px 20px}
+.header img{width:85px;height:85px;border-radius:50%;background:white;padding:8px;margin-bottom:12px;border:3px solid rgba(255,255,255,0.3)}
+.header h1{margin:0;font-size:23px;font-weight:700}
+.header p{margin:8px 0 0;opacity:0.9;font-size:13px}
+.content{padding:28px 22px}
+label{display:block;margin-top:16px;font-weight:600;font-size:13px;color:#444}
+input,select,textarea{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:12px;margin-top:6px;font-size:15px;transition:0.2s}
+input:focus,select:focus,textarea:focus{border-color:#1a73e8;outline:none;box-shadow:0 0 0 3px rgba(26,115,232,0.1)}
+.slots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
+.slot{padding:12px;border:2px solid #1a73e8;border-radius:10px;text-align:center;cursor:pointer;font-weight:600;font-size:13px;transition:0.2s}
+.slot:hover:not(.booked){background:#1a73e8;color:white;transform:scale(1.05)}
+.slot.selected{background:#1a73e8;color:white;border-color:#1a73e8}
+button{background:linear-gradient(135deg,#1a73e8 0%,#0d47a1 100%);color:white;border:none;padding:16px;width:100%;border-radius:12px;font-size:16px;font-weight:700;margin-top:22px;cursor:pointer}
+.note{font-size:12px;color:#777;text-align:center;margin-top:15px}
+@media(max-width:600px){.slots{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <img src="An9GSyKLCFkFWnsQkhctfP-_gQzdGVx54_rntljYgVR8T3AKJ_j0oVqtWauvTK6BWGbdwzTlkE5WbupqHKaWkj47dnw9HpvtEQqoJ9dtGWlVEkcYFqWx751x" alt="Logo">
+    <h1>Bruv Councilor Agency</h1>
+    <p>Professional Guidance • Confidential • 9AM-11PM</p>
+  </div>
+
+  <div class="content">
+    <form id="bookingForm">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Your full name" required>
+
+      <label>Phone / WhatsApp</label>
+      <input type="tel" id="phone" placeholder="+254 7XX XXX" required>
+
+      <label>Session Type</label>
+      <select id="type" required>
+        <option value="">Select session type...</option>
+        <option>Individual Counseling</option>
+        <option>Couples/Marriage Counseling</option>
+        <option>Career Guidance</option>
+        <option>Student Counseling</option>
+        <option>Stress & Anxiety Support</option>
+      </select>
+
+      <label>Select Date</label>
+      <input type="date" id="date" required>
+
+      <label>Choose Time Slot - 9AM to 11PM</label>
+      <div class="slots" id="slots">Pick date first</div>
+      <input type="hidden" id="time" required>
+
+      <label>What would you like help with? Optional</label>
+      <textarea id="message" rows="3" placeholder="Brief description..."></textarea>
+
+      <button type="submit">Book Session Now</button>
+      <p class="note">All sessions are 100% confidential. You’ll get WhatsApp confirmation.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+document.getElementById('date').addEventListener('change', function(){
+  const slotsDiv = document.getElementById('slots');
+  slotsDiv.innerHTML = '';
+
+  for(let h=9; h<23; h++){
+    for(let m=0; m<60; m+=30){
+      const hour12 = h > 12? h - 12 : h;
+      const ampm = h >= 12? 'PM' : 'AM';
+      const time = `${hour12}:${m.toString().padStart(2,'0')} ${ampm}`;
+
+      const slot = document.createElement('div');
+      slot.className = 'slot';
+      slot.textContent = time;
+      slot.onclick = function(){
+        document.querySelectorAll('.slot').forEach(s=>s.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('time').value = time;
+      }
+      slotsDiv.appendChild(slot);
+    }
+  }
+});
+
+document.getElementById('bookingForm').onsubmit = function(e){
+  e.preventDefault();
+  if(!document.getElementById('time').value){
+    alert('Please select a time slot');
+    return;
+  }
+  const name = document.getElementById('name').value;
+  alert(`Thank you ${name}!\n\nYour session request is received for ${document.getElementById('date').value} at ${document.getElementById('time').value}.\n\nWe’ll confirm via WhatsApp shortly.`);
+  this.reset();
+  document.getElementById('slots').innerHTML = 'Pick date first';
+};
+</script>
+</body>
+</html>
