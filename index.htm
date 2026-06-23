@@ -2,30 +2,84 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Session</title>
+  <title>Book Session - Bruv Councilor</title>
   <style>
-    body {font-family: Arial; max-width: 500px; margin: 40px auto; padding: 20px; background: #f5f5f5;}
-    h2 {text-align: center; color: #2c3e50;}
-    input, button {width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;}
-    button {background: #25D366; color: white; border: none; font-size: 16px; font-weight: bold;}
-    button:active {background: #1ebe5b;}
+    * {box-sizing: border-box; margin: 0; padding: 0;}
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .box {
+      background: white;
+      max-width: 420px;
+      width: 100%;
+      padding: 35px 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center; 
+      color: #2c3e50;
+      margin-bottom: 8px;
+      font-size: 24px;
+    }
+    p.sub {
+      text-align: center;
+      color: #7f8c8d;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      color: #34495e;
+      margin: 12px 0 5px;
+      font-size: 14px;
+    }
+    input {
+      width: 100%; 
+      padding: 14px; 
+      border: 2px solid #e0e0e0; 
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    input:focus {
+      border-color: #667eea;
+      outline: none;
+    }
+    button {
+      width: 100%; 
+      padding: 16px; 
+      margin-top: 20px;
+      background: #25D366; 
+      color: white; 
+      border: none; 
+      border-radius: 8px;
+      font-size: 17px; 
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:active {
+      background: #1ebe5b;
+      transform: scale(0.98);
+    }
+    .note {
+      text-align: center;
+      font-size: 12px;
+      color: #95a5a6;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
-  <h2>Book Your Session</h2>
-  <form action="https://formsubmit.co/bruv93586@gmail.com" method="POST">
-    <input type="hidden" name="_subject" value="New Booking - Bruv Councilor">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_autoresponse" value="Hi {Name}! Your session with Bruv Councilor is confirmed for {Date} at {Time}. See you then!">
-    <input type="hidden" name="_next" value="https://wa.me/254XXXXXXXXX?text=Hi%20Bruv%20Councilor%2C%20I%20just%20booked%20for%20{Date}%20at%20{Time}.%20Please%20confirm.">
+  <div class="box">
+    <h2>Book Your Session</h2>
+    <p class="sub">Fill details below. Takes 20 seconds</p>
     
-    <input type="text" name="Name" placeholder="Full Name" required>
-    <input type="tel" name="Phone" placeholder="WhatsApp Number with 254..." required>
-    <input type="date" name="Date" required>
-    <input type="time" name="Time" required>
-    
-    <button type="submit">Book Now</button>
-  </form>
-</body>
-</html>
